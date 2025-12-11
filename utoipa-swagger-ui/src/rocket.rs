@@ -103,7 +103,7 @@ impl Handler for ServeSwagger {
         match super::serve(request_path, self.1.clone()) {
             Ok(swagger_file) => swagger_file
                 .map(|file| Outcome::from(request, file))
-                .unwrap_or_else(|| Outcome::from(request, NotFound(format!("Swagger UI file not found: {}", request_path))),
+                .unwrap_or_else(|| Outcome::from(request, NotFound(format!("Swagger UI file not found: {}", request_path)))),
             Err(error) => Outcome::from(
                 request,
                 rocket::response::status::Custom(Status::InternalServerError, error.to_string()),
